@@ -9,14 +9,17 @@ const handleResponse = (res: Response) => {
     return res.json();
 }
 
-export function getIngredientsData() {
-    return axios(`${BASE_URL}ingredients`)
-        .then(res => res.data)
-        .catch(error => {
-            console.error('Error fetching ingredients data:', error);
-            return [];
-        });
+
+export async function getIngredientsData(): Promise<any> {
+    try {
+        const res = await axios.get(`${BASE_URL}ingredients`)
+        return res.data
+
+    } catch (e) {
+        console.log(e)
+    }
 }
+
 
 //TODO: refactor to use axios
 export function getInitialOrder(ingredientIds: Array<number>) {
